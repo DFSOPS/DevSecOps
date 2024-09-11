@@ -1,7 +1,5 @@
 name: SCA Scan Project 3
 
-
-
 on:
 
   push:
