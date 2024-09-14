@@ -34,4 +34,4 @@ This project demonstrates a comprehensive **Shift-Left CI/CD pipeline** designed
 
 This project is an excellent example of implementing a shift-left security strategy within a CI/CD pipeline, demonstrating a proactive approach to securing applications throughout the development lifecycle while ensuring secure storage and management of artifacts.  
 
-  ![alt text](image.png)
+![alt text](image.png)
