@@ -32,6 +32,6 @@ This project demonstrates a comprehensive **Shift-Left CI/CD pipeline** designed
 -   **Infrastructure Security**: The IaC scanning with Trivy ensures that infrastructure configurations adhere to security best practices, reducing the risk of misconfigurations and security gaps.
 -   **Secure Storage**: Utilizing Amazon S3 for artifact storage ensures that critical data is securely managed and accessible only to authorized entities, protecting against unauthorized access and data breaches.
 
-This project is an excellent example of implementing a shift-left security strategy within a CI/CD pipeline, demonstrating a proactive approach to securing applications throughout the development lifecycle while ensuring secure storage and management of artifacts.
-  ![DevSecOps-HLD.drawio](images/c:\Users\Daniel\Downloads\DevSecOps-HLD.drawio.png)
-  
+This project is an excellent example of implementing a shift-left security strategy within a CI/CD pipeline, demonstrating a proactive approach to securing applications throughout the development lifecycle while ensuring secure storage and management of artifacts.  
+
+  ![alt text](image.png)
