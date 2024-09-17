@@ -121,3 +121,4 @@ graph TD
     Terraform -- Defines Resources --> EC2
     CI --> GitHubActions
     CD --> GitHubActions
+
