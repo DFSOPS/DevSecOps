@@ -71,4 +71,40 @@ Conclusion
 This project exemplifies a modern, security-focused approach to CI/CD, aligning with the principles of DevSecOps. By integrating robust security scans and automating the deployment process, this pipeline ensures a secure and efficient path from development to production.Feel free to explore the repository and reach out if you have any questions or would like further information!
 
 ### High Level Diagram
-![alt text](image.png)
+```mermaid
+graph TD
+    %% Define Components
+    A[Source Code Repository (GitHub)] --> B[CI/CD Pipeline (GitHub Actions)]
+    B --> C[Build]
+    C --> D[CodeQL (SAST)]
+    C --> E[Trivy (SCA)]
+    C --> F[Trivy (IaC)]
+    D --> G[AWS EC2 Deployment]
+    E --> G
+    F --> G
+
+    %% Infrastructure Management
+    H[Terraform] --> I[AWS EC2]
+
+    %% Deployment Flow
+    B --> H
+    H --> I
+
+    %% Key Features and Processes
+    B --> J[Automated Security Scans]
+    J --> K[Static Application Security Testing (SAST)]
+    J --> L[Software Composition Analysis (SCA)]
+    J --> M[Infrastructure as Code (IaC) Scanning]
+
+    %% Deployment and Automation
+    G --> N[Continuous Delivery to AWS EC2]
+    N --> O[Production]
+
+    %% Class Definitions
+    classDef pipeline fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef security fill:#ccf,stroke:#333,stroke-width:2px;
+    classDef deployment fill:#cfc,stroke:#333,stroke-width:2px;
+
+    class A,B,H pipeline;
+    class D,E,F,K,L,M security;
+    class G,N,O deployment;
