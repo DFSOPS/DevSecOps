@@ -75,50 +75,44 @@ This project exemplifies a modern, security-focused approach to CI/CD, aligning 
 ```mermaid
 graph TD
     %% Define Components
-    GitHubActions[GitHub Actions] --> CodeQL[CodeQL (SAST)]
-    GitHubActions --> Trivy[Trivy (SCA & IaC)]
-    GitHubActions --> Terraform[Terraform]
-    Terraform --> EC2[AWS EC2]
-    CodeQL -- Scans Code --> GitHubActions
-    Trivy -- Scans Dependencies & IaC --> GitHubActions
-    EC2 -- Hosts Web App --> GitHubActions
+    A[Source Code] --> B[GitHub Actions]
+    B --> C[Build]
+    C --> D[Static Analysis (CodeQL)]
+    C --> E[Dependency Scanning (Trivy)]
+    C --> F[Infrastructure Scanning (Trivy)]
+    D --> G[CI/CD Pipeline]
+    E --> G
+    F --> G
+    G --> H[Deploy to AWS EC2]
+    H --> I[Production Environment]
 
-    %% Key Features
-    subgraph Security-First Approach
-        ShiftLeft[Shift Left Strategy]
-        ComprehensiveScanning[Comprehensive Scanning]
-        ShiftLeft --> CodeQL
-        ShiftLeft --> Trivy
+    %% Define Subgraphs
+    subgraph Security Scans
+        D
+        E
+        F
     end
 
-    subgraph Automated Security Scans
-        SAST[Static Application Security Testing]
-        SCA[Software Composition Analysis]
-        IaC[Infrastructure as Code Scanning]
-        CodeQL --> SAST
-        Trivy --> SCA
-        Trivy --> IaC
+    subgraph CI/CD Workflow
+        B
+        C
+        G
     end
 
-    subgraph Infrastructure as Code
-        Consistency[Consistency and Reproducibility]
-        VersionControl[Version Control and Auditing]
-        Terraform --> Consistency
-        Terraform --> VersionControl
+    subgraph Deployment
+        H
+        I
     end
 
-    subgraph Enhanced CI/CD Automation
-        CI[Continuous Integration]
-        CD[Continuous Delivery]
-        GitHubActions --> CI
-        GitHubActions --> CD
-    end
+    %% Labels and Styles
+    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef ci_cd fill:#ccf,stroke:#333,stroke-width:2px;
+    classDef security fill:#fcf,stroke:#333,stroke-width:2px;
+    classDef deploy fill:#cfc,stroke:#333,stroke-width:2px;
 
-    %% Relationships
-    GitHubActions -- Automates Workflow --> CodeQL
-    GitHubActions -- Automates Workflow --> Trivy
-    GitHubActions -- Manages Infrastructure --> Terraform
-    Terraform -- Defines Resources --> EC2
-    CI --> GitHubActions
-    CD --> GitHubActions
+    class A source;
+    class B,C,G ci_cd;
+    class D,E,F security;
+    class H,I deploy;
+
 
