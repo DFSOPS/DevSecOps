@@ -73,39 +73,21 @@ This project exemplifies a modern, security-focused approach to CI/CD, aligning 
 ### High Level Diagram  
 
 ```mermaid
-graph TD
-    A[Developer] -->|Push Code| B[GitHub Actions]
-    B --> C[CodeQL]
-    B --> D[Trivy (SCA)]
-    B --> E[Trivy (IaC)]
-    C --> F[Code Analysis Report]
-    D --> G[Dependency Scan Report]
-    E --> H[Infrastructure Scan Report]
-    F --> I[Alerts & Notifications]
-    G --> I
-    H --> I
+graph TD;
+    A[Developer] -->|Code Changes| B[GitHub Repository]
+    B -->|Trigger CI/CD| C[GitHub Actions]
+    C -->|Build & Test| D[Automated Tests]
+    D -->|Pass| E[Security Scans]
+    E -->|SAST| F[CodeQL]
+    E -->|SCA & IaC| G[Trivy]
+    F -->|Vulnerabilities Found| H[Fix Code]
+    G -->|Vulnerabilities Found| H
+    H -->|Code Fixed| B
+    E -->|No Vulnerabilities| I[Deploy to AWS EC2]
     I --> J[AWS EC2]
-    B --> K[Terraform]
-    K --> J
-    J -->|Deploy Application| L[Web Application on AWS EC2]
-    subgraph CI/CD Pipeline
-        B
-        C
-        D
-        E
-        K
-    end
-    subgraph Security Scans
-        C
-        D
-        E
-    end
-    subgraph Reporting
-        F
-        G
-        H
-        I
-    end
+    C -->|Infrastructure as Code| K[Terraform]
+    K -->|Manage Resources| J
+
 
 
 
