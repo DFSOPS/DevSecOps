@@ -75,7 +75,7 @@ This project exemplifies a modern, security-focused approach to CI/CD, aligning 
 ```mermaid
 graph TD
     A[Developer] -->|Push Code| B[GitHub Actions]
-    B --> C[CodeQL (SAST)]
+    B --> C[CodeQL]
     B --> D[Trivy (SCA)]
     B --> E[Trivy (IaC)]
     C --> F[Code Analysis Report]
@@ -88,26 +88,24 @@ graph TD
     B --> K[Terraform]
     K --> J
     J -->|Deploy Application| L[Web Application on AWS EC2]
-    subgraph "CI/CD Pipeline"
+    subgraph CI/CD Pipeline
         B
         C
         D
         E
         K
     end
-    subgraph "Security Scans"
+    subgraph Security Scans
         C
         D
         E
     end
-    subgraph "Reporting"
+    subgraph Reporting
         F
         G
         H
         I
     end
 
-    class D,E,F security;
-    class H,I deploy;
 
 
