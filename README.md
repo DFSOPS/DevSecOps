@@ -70,7 +70,8 @@ Conclusion
 
 This project exemplifies a modern, security-focused approach to CI/CD, aligning with the principles of DevSecOps. By integrating robust security scans and automating the deployment process, this pipeline ensures a secure and efficient path from development to production.Feel free to explore the repository and reach out if you have any questions or would like further information!
 
-### High Level Diagram
+### High Level Diagram  
+
 ```mermaid
 graph TD
     %% Define Components
