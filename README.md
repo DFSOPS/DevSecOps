@@ -74,7 +74,6 @@ This project exemplifies a modern, security-focused approach to CI/CD, aligning 
 
 ```mermaid
 graph TD
-    %% Define Components
     A[Source Code] --> B[GitHub Actions]
     B --> C[Build]
     C --> D[Static Analysis (CodeQL)]
@@ -86,7 +85,6 @@ graph TD
     G --> H[Deploy to AWS EC2]
     H --> I[Production Environment]
 
-    %% Define Subgraphs
     subgraph Security Scans
         D
         E
@@ -104,7 +102,6 @@ graph TD
         I
     end
 
-    %% Labels and Styles
     classDef source fill:#f9f,stroke:#333,stroke-width:2px;
     classDef ci_cd fill:#ccf,stroke:#333,stroke-width:2px;
     classDef security fill:#fcf,stroke:#333,stroke-width:2px;
