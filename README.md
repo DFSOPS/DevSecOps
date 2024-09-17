@@ -74,41 +74,39 @@ This project exemplifies a modern, security-focused approach to CI/CD, aligning 
 
 ```mermaid
 graph TD
-    A[Source Code] --> B[GitHub Actions]
-    B --> C[Build]
-    C --> D[Static Analysis (CodeQL)]
-    C --> E[Dependency Scanning (Trivy)]
-    C --> F[Infrastructure Scanning (Trivy)]
-    D --> G[CI/CD Pipeline]
-    E --> G
-    F --> G
-    G --> H[Deploy to AWS EC2]
-    H --> I[Production Environment]
-
-    subgraph Security Scans
-        D
-        E
-        F
-    end
-
-    subgraph CI/CD Workflow
+    A[Developer] -->|Push Code| B[GitHub Actions]
+    B --> C[CodeQL (SAST)]
+    B --> D[Trivy (SCA)]
+    B --> E[Trivy (IaC)]
+    C --> F[Code Analysis Report]
+    D --> G[Dependency Scan Report]
+    E --> H[Infrastructure Scan Report]
+    F --> I[Alerts & Notifications]
+    G --> I
+    H --> I
+    I --> J[AWS EC2]
+    B --> K[Terraform]
+    K --> J
+    J -->|Deploy Application| L[Web Application on AWS EC2]
+    subgraph "CI/CD Pipeline"
         B
         C
-        G
+        D
+        E
+        K
     end
-
-    subgraph Deployment
+    subgraph "Security Scans"
+        C
+        D
+        E
+    end
+    subgraph "Reporting"
+        F
+        G
         H
         I
     end
 
-    classDef source fill:#f9f,stroke:#333,stroke-width:2px;
-    classDef ci_cd fill:#ccf,stroke:#333,stroke-width:2px;
-    classDef security fill:#fcf,stroke:#333,stroke-width:2px;
-    classDef deploy fill:#cfc,stroke:#333,stroke-width:2px;
-
-    class A source;
-    class B,C,G ci_cd;
     class D,E,F security;
     class H,I deploy;
 
