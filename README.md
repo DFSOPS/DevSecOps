@@ -75,41 +75,49 @@ This project exemplifies a modern, security-focused approach to CI/CD, aligning 
 ```mermaid
 graph TD
     %% Define Components
-    A[Source Code Repository (GitHub)]
-    B[CI/CD Pipeline (GitHub Actions)]
-    C[Build]
-    D[CodeQL (SAST)]
-    E[Trivy (SCA)]
-    F[Trivy (IaC)]
-    G[AWS EC2 Deployment]
-    H[Terraform]
-    I[AWS EC2]
+    GitHubActions[GitHub Actions] --> CodeQL[CodeQL (SAST)]
+    GitHubActions --> Trivy[Trivy (SCA & IaC)]
+    GitHubActions --> Terraform[Terraform]
+    Terraform --> EC2[AWS EC2]
+    CodeQL -- Scans Code --> GitHubActions
+    Trivy -- Scans Dependencies & IaC --> GitHubActions
+    EC2 -- Hosts Web App --> GitHubActions
 
-    %% Define Flows
-    A --> B
-    B --> C
-    C --> D
-    C --> E
-    C --> F
-    D --> G
-    E --> G
-    F --> G
-    B --> H
-    H --> I
-    G --> J[Continuous Delivery to AWS EC2]
-    J --> K[Production]
+    %% Key Features
+    subgraph Security-First Approach
+        ShiftLeft[Shift Left Strategy]
+        ComprehensiveScanning[Comprehensive Scanning]
+        ShiftLeft --> CodeQL
+        ShiftLeft --> Trivy
+    end
 
-    %% Key Features and Processes
-    B --> L[Automated Security Scans]
-    L --> M[Static Application Security Testing (SAST)]
-    L --> N[Software Composition Analysis (SCA)]
-    L --> O[Infrastructure as Code (IaC) Scanning]
+    subgraph Automated Security Scans
+        SAST[Static Application Security Testing]
+        SCA[Software Composition Analysis]
+        IaC[Infrastructure as Code Scanning]
+        CodeQL --> SAST
+        Trivy --> SCA
+        Trivy --> IaC
+    end
 
-    %% Class Definitions
-    classDef pipeline fill:#f9f,stroke:#333,stroke-width:2px;
-    classDef security fill:#ccf,stroke:#333,stroke-width:2px;
-    classDef deployment fill:#cfc,stroke:#333,stroke-width:2px;
+    subgraph Infrastructure as Code
+        Consistency[Consistency and Reproducibility]
+        VersionControl[Version Control and Auditing]
+        Terraform --> Consistency
+        Terraform --> VersionControl
+    end
 
-    class A,B,H pipeline;
-    class D,E,F,M,N,O security;
-    class G,J,K deployment;
+    subgraph Enhanced CI/CD Automation
+        CI[Continuous Integration]
+        CD[Continuous Delivery]
+        GitHubActions --> CI
+        GitHubActions --> CD
+    end
+
+    %% Relationships
+    GitHubActions -- Automates Workflow --> CodeQL
+    GitHubActions -- Automates Workflow --> Trivy
+    GitHubActions -- Manages Infrastructure --> Terraform
+    Terraform -- Defines Resources --> EC2
+    CI --> GitHubActions
+    CD --> GitHubActions
