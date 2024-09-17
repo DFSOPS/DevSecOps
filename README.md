@@ -74,31 +74,35 @@ This project exemplifies a modern, security-focused approach to CI/CD, aligning 
 ```mermaid
 graph TD
     %% Define Components
-    A[Source Code Repository (GitHub)] --> B[CI/CD Pipeline (GitHub Actions)]
-    B --> C[Build]
-    C --> D[CodeQL (SAST)]
-    C --> E[Trivy (SCA)]
-    C --> F[Trivy (IaC)]
-    D --> G[AWS EC2 Deployment]
+    A[Source Code Repository (GitHub)]
+    B[CI/CD Pipeline (GitHub Actions)]
+    C[Build]
+    D[CodeQL (SAST)]
+    E[Trivy (SCA)]
+    F[Trivy (IaC)]
+    G[AWS EC2 Deployment]
+    H[Terraform]
+    I[AWS EC2]
+
+    %% Define Flows
+    A --> B
+    B --> C
+    C --> D
+    C --> E
+    C --> F
+    D --> G
     E --> G
     F --> G
-
-    %% Infrastructure Management
-    H[Terraform] --> I[AWS EC2]
-
-    %% Deployment Flow
     B --> H
     H --> I
+    G --> J[Continuous Delivery to AWS EC2]
+    J --> K[Production]
 
     %% Key Features and Processes
-    B --> J[Automated Security Scans]
-    J --> K[Static Application Security Testing (SAST)]
-    J --> L[Software Composition Analysis (SCA)]
-    J --> M[Infrastructure as Code (IaC) Scanning]
-
-    %% Deployment and Automation
-    G --> N[Continuous Delivery to AWS EC2]
-    N --> O[Production]
+    B --> L[Automated Security Scans]
+    L --> M[Static Application Security Testing (SAST)]
+    L --> N[Software Composition Analysis (SCA)]
+    L --> O[Infrastructure as Code (IaC) Scanning]
 
     %% Class Definitions
     classDef pipeline fill:#f9f,stroke:#333,stroke-width:2px;
@@ -106,5 +110,5 @@ graph TD
     classDef deployment fill:#cfc,stroke:#333,stroke-width:2px;
 
     class A,B,H pipeline;
-    class D,E,F,K,L,M security;
-    class G,N,O deployment;
+    class D,E,F,M,N,O security;
+    class G,J,K deployment;
